@@ -55,7 +55,7 @@
                                         <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
                                     </div>
 
-                                    <form class="row g-3" method="POST" action="{{ route('login') }}" autocomplete="off">
+                                    <form class="row g-3" method="POST" action="{{ route('login') }}" autocomplete="off" id="loginForm">
                                         @csrf
                                         <div class="col-12">
                                             <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
@@ -76,11 +76,11 @@
                                         @enderror
 
                                         <div class="col-12">
-                                            <button class="btn btn-primary w-100" type="submit">Login Here</button>
+                                            <button class="btn btn-primary w-100" type="submit" id="loginButton">
+                                                <span id="buttonText">Login Here</span>
+                                                <span id="spinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                            </button>
                                         </div>
-                                        <!-- <div class="col-12">
-                                            <p class="small mb-0 text-center">Don't have an account? <a href="/register">Create an account</a></p>
-                                        </div> -->
                                     </form>
 
                                 </div>
@@ -97,17 +97,24 @@
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
-    <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/chart.js/chart.umd.js"></script>
-    <script src="assets/vendor/echarts/echarts.min.js"></script>
-    <script src="assets/vendor/quill/quill.js"></script>
-    <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
-    <script src="assets/vendor/tinymce/tinymce.min.js"></script>
-    <script src="assets/vendor/php-email-form/validate.js"></script>
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
+
+    <script>
+        // Add event listener to form submission
+        document.getElementById('loginForm').addEventListener('submit', function () {
+            const loginButton = document.getElementById('loginButton');
+            const spinner = document.getElementById('spinner');
+            const buttonText = document.getElementById('buttonText');
+
+            // Disable button and show spinner
+            loginButton.disabled = true;
+            spinner.classList.remove('d-none');
+            buttonText.textContent = 'Logging in...';
+        });
+    </script>
 
 </body>
 
